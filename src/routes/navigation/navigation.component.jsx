@@ -13,6 +13,7 @@ export default function Navigation()
         </Link>
         <div className="nav-links-container">
           <Link className="nav-link" to="/shop">Shop</Link>
+          <Link className="nav-link" to="/sign-in">Signin</Link>
         </div>
       </nav>
       <Outlet />
