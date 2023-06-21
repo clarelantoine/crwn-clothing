@@ -1,3 +1,4 @@
+import SignUpForm from "../../components/sign-up-form/sign-up-form.component"
 import { signInWithGooglePopup, createUserDocumentFromAuth } from "../../utils/firebase/firebase.utils"
 
 export default function SingIn()
@@ -12,6 +13,8 @@ export default function SingIn()
     <div>
       <h1>Sign in page</h1>
       <button onClick={logGoogleUser}> Sign in with Google </button>
+
+      <SignUpForm />
     </div>
   )
 }
