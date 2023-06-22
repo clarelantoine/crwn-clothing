@@ -1,8 +1,11 @@
-body {
-  margin: 0;
-  font-family: 'Open Sans', sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+@font-face {
+  font-family: 'Open Sans Condensed';
+  src:  url('./assets/fonts/OpenSans-CondLight.woff2') format('woff2'),
+        url('./assets/fonts/OpenSans-CondLight.woff') format('woff');
+}
+
+* {
+  box-sizing: border-box;
 }
 
 code {
@@ -10,11 +13,14 @@ code {
     monospace;
 }
 
+body {
+  margin: 0;
+  font-family: 'Open Sans Condensed', 'Open Sans', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
 a {
   text-decoration: none;
   color: black;
-}
-
-* {
-  box-sizing: border-box;
 }
