@@ -1,0 +1,18 @@
+{
+  "extends": ["wesbos"],
+  "rules": {
+    // ... any eslint rules here
+    "react/prop-types": 0,
+    "react/button-has-type": 0,
+    "react/jsx-no-constructed-context-values": 0,
+    
+    "prettier/prettier": [
+      "error",
+      {
+        "singleQuote": true,
+        "endOfLine": "auto",
+        "tabWidth": 4
+      },
+    ],
+  }
+}
