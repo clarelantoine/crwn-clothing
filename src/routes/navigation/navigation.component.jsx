@@ -8,14 +8,13 @@ import { ReactComponent as CrwnLogo } from '../../assets/crown.svg';
 import './navigation.styles.scss';
 
 export default function Navigation() {
-    const { currentUser, setCurrentUser } = useContext(UserContext);
+    // get user context
+    const { currentUser } = useContext(UserContext);
 
     // user sign out handler
     const signOutHandler = async () => {
         // sign out auth user firebase
         await SignOutUser();
-        // set currentUser of the user context to null
-        setCurrentUser(null);
     };
 
     /*

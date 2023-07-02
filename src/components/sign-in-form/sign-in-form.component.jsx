@@ -1,10 +1,8 @@
-import { useContext, useState } from 'react';
+import { useState } from 'react';
 import {
-    createUserDocumentFromAuth,
     signInAuthUserWithEmailAndPassword,
     signInWithGooglePopup,
 } from '../../utils/firebase/firebase.utils';
-import { UserContext } from '../../contexts/user.context';
 import Button from '../button/button.component';
 import FormInput from '../form-input/form-input.component';
 
@@ -23,17 +21,12 @@ export default function SignInForm() {
     // deconstruct formFields state object
     const { email, password } = formFields;
 
-    // get the user context
-    const { setCurrentUser } = useContext(UserContext);
-
     // reset form field to default/empty
     const resetFormFields = () => setFormFields(defaultFormFields);
 
+    // sign in with google
     const signInWithGoogle = async () => {
-        const { user } = await signInWithGooglePopup();
-        await createUserDocumentFromAuth(user);
-        // set user context
-        setCurrentUser(user);
+        await signInWithGooglePopup();
     };
 
     // handle fields onChange event
@@ -49,12 +42,7 @@ export default function SignInForm() {
 
         // if passwords are matching, try to create the user account
         try {
-            const { user } = await signInAuthUserWithEmailAndPassword(
-                email,
-                password
-            );
-            // set value of auth user to current user context
-            setCurrentUser(user);
+            await signInAuthUserWithEmailAndPassword(email, password);
             // reset all form fields
             resetFormFields();
         } catch (error) {
