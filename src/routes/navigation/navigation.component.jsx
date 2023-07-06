@@ -4,9 +4,10 @@ import { useContext } from 'react';
 import CartIcon from '../../components/cart-icon/car-icon.component';
 import CartDropdown from '../../components/cart-dropdown/cart-dropdown.component';
 
-import { SignOutUser } from '../../utils/firebase/firebase.utils';
 import { UserContext } from '../../contexts/user.context';
 import { CartContext } from '../../contexts/cart.context';
+
+import { SignOutUser } from '../../utils/firebase/firebase.utils';
 
 import { ReactComponent as CrwnLogo } from '../../assets/crown.svg';
 
