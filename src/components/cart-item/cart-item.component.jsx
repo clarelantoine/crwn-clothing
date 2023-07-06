@@ -1,6 +1,7 @@
 import './cart-item.styles.scss';
 
 export default function CartItem({ cartItem }) {
+    // destructure the cart item object
     const { name, imageUrl, price, quantity } = cartItem;
 
     return (

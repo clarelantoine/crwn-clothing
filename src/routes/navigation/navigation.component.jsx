@@ -14,9 +14,8 @@ import { ReactComponent as CrwnLogo } from '../../assets/crown.svg';
 import './navigation.styles.scss';
 
 export default function Navigation() {
-    // get user context
-    const { currentUser } = useContext(UserContext);
-    const { isCartOpen } = useContext(CartContext);
+    const { currentUser } = useContext(UserContext); // get user context
+    const { isCartOpen } = useContext(CartContext); // get cart context
 
     // user sign out handler
     const signOutHandler = async () => {

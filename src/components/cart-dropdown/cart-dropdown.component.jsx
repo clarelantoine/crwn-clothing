@@ -8,6 +8,7 @@ import { CartContext } from '../../contexts/cart.context';
 import './cart-dropdown.styles.scss';
 
 export default function CartDropdown() {
+    // get cart context
     const { cartItems } = useContext(CartContext);
 
     return (

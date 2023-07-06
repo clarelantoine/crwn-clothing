@@ -1,5 +1,6 @@
 import { createContext, useEffect, useState } from 'react';
 
+// add to cart logic
 const addCartItem = (cartItems, productToAdd) => {
     // check if cartItems contains productToAdd
     const existingCartItem = cartItems.find(
@@ -28,10 +29,12 @@ export const CartContext = createContext({
 });
 
 export const CartProvider = ({ children }) => {
+    // useState(s)
     const [isCartOpen, setIsCartOpen] = useState(false);
     const [cartItems, setCartItems] = useState([]);
     const [cartCount, setCartCount] = useState(0);
 
+    // calculate cart total count every time cartItems is updated
     useEffect(() => {
         const newCartCount = cartItems.reduce(
             (total, cartItem) => total + cartItem.quantity,
@@ -40,6 +43,7 @@ export const CartProvider = ({ children }) => {
         setCartCount(newCartCount);
     }, [cartItems]);
 
+    // handle add to cart feature
     const addItemToCart = (productToAdd) => {
         setCartItems(addCartItem(cartItems, productToAdd));
     };
