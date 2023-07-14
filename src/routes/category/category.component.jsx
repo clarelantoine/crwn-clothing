@@ -5,7 +5,7 @@ import { CategoriesContext } from '../../contexts/categories.context';
 
 import ProductCard from '../../components/product-card/product-card.component';
 
-import './category.styles.scss';
+import { CategoryTitle, CategoryContainer } from './category.styles';
 
 export default function Category() {
     // get params (category) from url (e.g /shop/hats)
@@ -24,13 +24,13 @@ export default function Category() {
 
     return (
         <>
-            <h2 className="category-title">{category.toUpperCase()}</h2>
-            <div className="category-container">
+            <CategoryTitle>{category.toUpperCase()}</CategoryTitle>
+            <CategoryContainer>
                 {products &&
                     products.map((product) => (
                         <ProductCard key={product.id} product={product} />
                     ))}
-            </div>
+            </CategoryContainer>
         </>
     );
 }
