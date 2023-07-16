@@ -7,11 +7,7 @@ export default function FormInput(props) {
         <Group>
             <InputField {...otherProps} />
             {label && (
-                <InputLabel
-                    className={`${
-                        otherProps.value.length ? 'shrink' : ''
-                    } form-input-label`}
-                >
+                <InputLabel $shrink={otherProps.value.length}>
                     {label}
                 </InputLabel>
             )}
