@@ -1,4 +1,4 @@
-import { createContext, useEffect, useState } from 'react';
+import { createContext, useEffect, useReducer, useState } from 'react';
 import {
     createUserDocumentFromAuth,
     onAuthStateChangedListener,
@@ -10,11 +10,49 @@ export const UserContext = createContext({
     setCurrentUser: () => null,
 });
 
+// object of reducer action type
+const USER_ACTION_TYPES = {
+    SET_CURRENT_USER: 'SET_CURRENT_USER',
+};
+
+// create user reducer
+const userReducer = (state, action) => {
+    // deconstruct the reducer action
+    const { type, payload } = action;
+
+    // swtich to matching type
+    switch (type) {
+        case USER_ACTION_TYPES.SET_CURRENT_USER:
+            return {
+                ...state,
+                currentUser: payload,
+            };
+        default:
+            throw new Error(`Unhandled type ${type} in userReducer`);
+    }
+};
+
+// initial state of the user reducer
+const INITIAL_STATE = {
+    currentUser: null,
+};
+
 // user context provider
 export const UserProvider = ({ children }) => {
     // make use of useState to elevate our userContext value
-    const [currentUser, setCurrentUser] = useState(null);
-    // pass the useState value and function to our userContext provider
+    // const [currentUser, setCurrentUser] = useState(null);
+
+    const [state, dispatch] = useReducer(userReducer, INITIAL_STATE);
+
+    // destructure currentUser from reducer state
+    const { currentUser } = state;
+
+    // function to dispatch setCurrentUser
+    const setCurrentUser = (user) => {
+        dispatch({ type: USER_ACTION_TYPES.SET_CURRENT_USER, paylaod: user });
+    };
+
+    // pass the value to our userContext provider
     const value = { currentUser, setCurrentUser };
 
     useEffect(() => {
