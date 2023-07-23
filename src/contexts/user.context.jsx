@@ -1,4 +1,4 @@
-import { createContext, useEffect, useReducer, useState } from 'react';
+import { createContext, useEffect, useReducer } from 'react';
 import {
     createUserDocumentFromAuth,
     onAuthStateChangedListener,
@@ -11,11 +11,16 @@ export const UserContext = createContext({
 });
 
 // object of reducer action type
-const USER_ACTION_TYPES = {
+export const USER_ACTION_TYPES = {
     SET_CURRENT_USER: 'SET_CURRENT_USER',
 };
 
-// create user reducer
+// initial state of the user reducer
+const INITIAL_STATE = {
+    currentUser: null,
+};
+
+// create user reducer function
 const userReducer = (state, action) => {
     // deconstruct the reducer action
     const { type, payload } = action;
@@ -32,11 +37,6 @@ const userReducer = (state, action) => {
     }
 };
 
-// initial state of the user reducer
-const INITIAL_STATE = {
-    currentUser: null,
-};
-
 // user context provider
 export const UserProvider = ({ children }) => {
     // make use of useState to elevate our userContext value
@@ -49,11 +49,11 @@ export const UserProvider = ({ children }) => {
 
     // function to dispatch setCurrentUser
     const setCurrentUser = (user) => {
-        dispatch({ type: USER_ACTION_TYPES.SET_CURRENT_USER, paylaod: user });
+        dispatch({
+            type: USER_ACTION_TYPES.SET_CURRENT_USER,
+            payload: user,
+        });
     };
-
-    // pass the value to our userContext provider
-    const value = { currentUser, setCurrentUser };
 
     useEffect(() => {
         // subscribe/unsbscribe to the user's sign-in state
@@ -69,6 +69,9 @@ export const UserProvider = ({ children }) => {
 
         return unsubscribe;
     }, []);
+
+    // pass the value to our userContext provider
+    const value = { currentUser, setCurrentUser };
 
     return (
         <UserContext.Provider value={value}>{children}</UserContext.Provider>
