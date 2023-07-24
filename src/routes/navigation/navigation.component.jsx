@@ -1,10 +1,10 @@
 import { Outlet } from 'react-router-dom';
 import { useContext } from 'react';
 
+import { useSelector } from 'react-redux';
 import CartIcon from '../../components/cart-icon/car-icon.component';
 import CartDropdown from '../../components/cart-dropdown/cart-dropdown.component';
 
-import { UserContext } from '../../contexts/user.context';
 import { CartContext } from '../../contexts/cart.context';
 
 import { SignOutUser } from '../../utils/firebase/firebase.utils';
@@ -17,9 +17,12 @@ import {
     NavLinks,
     NavLink,
 } from './navigation.styles';
+import { selectCurrentUser } from '../../store/user/user.selector';
 
 export default function Navigation() {
-    const { currentUser } = useContext(UserContext); // get user context
+    // get the current user from the global redux state
+    const currentUser = useSelector(selectCurrentUser);
+
     const { isCartOpen } = useContext(CartContext); // get cart context
 
     // user sign out handler
