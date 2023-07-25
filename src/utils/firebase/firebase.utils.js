@@ -35,6 +35,7 @@ const firebaseConfig = {
 /** ********************************************
  * initialize a firebase application
  ********************************************* */
+// eslint-disable-next-line
 const firebaseApp = initializeApp(firebaseConfig);
 
 /** ********************************************
@@ -174,13 +175,6 @@ export const getCategoriesAndDocuments = async () => {
     // execute the query and get the results
     const querySnapshot = await getDocs(q);
 
-    // create a hashtable based on the queried result
-    const categoryMap = querySnapshot.docs.reduce((acc, docSnapshot) => {
-        const { title, items } = docSnapshot.data();
-        acc[title.toLowerCase()] = items;
-        return acc;
-    }, {});
-
-    // return created hastable
-    return categoryMap;
+    // return array of categories
+    return querySnapshot.docs.map((docSnapshot) => docSnapshot.data());
 };
