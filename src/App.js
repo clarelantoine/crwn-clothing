@@ -32,6 +32,7 @@ export default function App() {
         });
 
         return unsubscribe;
+        // eslint-disable-next-line
     }, []);
 
     return (

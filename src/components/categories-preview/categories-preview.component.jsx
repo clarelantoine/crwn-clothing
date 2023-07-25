@@ -1,10 +1,11 @@
-import { useContext } from 'react';
-import { CategoriesContext } from '../../contexts/categories.context';
+import { useSelector } from 'react-redux';
+
 import CategoryPreview from '../category-preview/category-preview.component';
+import { selectCategoriesMap } from '../../store/categories/categories.selector';
 
 export default function CategoriesPreview() {
-    // get categories -> categoriesMap context
-    const { categoriesMap } = useContext(CategoriesContext);
+    // select the categoriesMap from the global state
+    const categoriesMap = useSelector(selectCategoriesMap);
 
     // create category preview cards based on the categories context
     return (
