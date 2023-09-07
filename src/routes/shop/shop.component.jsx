@@ -18,7 +18,6 @@ export default function Shop() {
             // fetch the categories from firebase
             const categoriesArray = await getCategoriesAndDocuments();
 
-            console.log(categoriesArray);
             // dispatch action to set the fetched categories data
             dispatch(setCategories(categoriesArray));
         };
