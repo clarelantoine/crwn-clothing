@@ -3,35 +3,18 @@ import { useEffect } from 'react';
 
 import { useDispatch } from 'react-redux';
 
-import {
-    createUserDocumentFromAuth,
-    onAuthStateChangedListener,
-} from './utils/firebase/firebase.utils';
-
-import { setCurrentUser } from './store/user/user.action';
-
 import Navigation from './routes/navigation/navigation.component';
 import Home from './routes/home/home.component';
 import Authentication from './routes/authentication/authentication.component';
 import Shop from './routes/shop/shop.component';
 import Checkout from './routes/checkout/checkout.component';
+import { checkUserSession } from './store/user/user.action';
 
 export default function App() {
     const dispatch = useDispatch();
 
     useEffect(() => {
-        // subscribe/unsbscribe to the user's sign-in state
-        const unsubscribe = onAuthStateChangedListener((user) => {
-            if (user) {
-                // if user not null, then create the user doc
-                createUserDocumentFromAuth(user);
-            }
-            // set auth user to setCurrentUser
-            dispatch(setCurrentUser(user));
-            // console.log(user);
-        });
-
-        return unsubscribe;
+        dispatch(checkUserSession());
         // eslint-disable-next-line
     }, []);
 

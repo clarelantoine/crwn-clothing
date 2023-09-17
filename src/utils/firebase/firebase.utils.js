@@ -118,7 +118,7 @@ export const createUserDocumentFromAuth = async (userAuth, additionalInfo) => {
     }
 
     // if user data exist
-    return userDocRef;
+    return userSnapshot;
 };
 
 /** ********************************************
@@ -178,3 +178,15 @@ export const getCategoriesAndDocuments = async () => {
     // return array of categories
     return querySnapshot.docs.map((docSnapshot) => docSnapshot.data());
 };
+
+export const getCurrentUser = () =>
+    new Promise((resolve, reject) => {
+        const unsubscribe = onAuthStateChanged(
+            auth,
+            (userAuth) => {
+                unsubscribe();
+                resolve(userAuth);
+            },
+            reject
+        );
+    });
