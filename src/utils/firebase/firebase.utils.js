@@ -122,11 +122,6 @@ export const createUserDocumentFromAuth = async (userAuth, additionalInfo) => {
 };
 
 /** ********************************************
- * sign out auth user
- ********************************************* */
-export const SignOutUser = async () => signOut(auth);
-
-/** ********************************************
  * adds an observer for changes to the user's sign-in state
  ********************************************* */
 export const onAuthStateChangedListener = (callback) =>
@@ -190,3 +185,8 @@ export const getCurrentUser = () =>
             reject
         );
     });
+
+/** ********************************************
+ * sign out auth user
+ ********************************************* */
+export const SignOutUser = async () => signOut(auth);

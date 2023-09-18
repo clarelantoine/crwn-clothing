@@ -1,12 +1,11 @@
 import { useState } from 'react';
-import {
-    createAuthUserWithEmailAndPassword,
-    createUserDocumentFromAuth,
-} from '../../utils/firebase/firebase.utils';
+import { useDispatch } from 'react-redux';
+
 import Button from '../button/button.component';
 import FormInput from '../form-input/form-input.component';
 
 import { SignUpContainer, Title } from './sign-up-form.styles';
+import { signUpStart } from '../../store/user/user.action';
 
 // default form fields value (empty)
 const defaultFormFields = {
@@ -19,6 +18,8 @@ const defaultFormFields = {
 export default function SignUpForm() {
     // create form fields state based on the the default value
     const [formFields, setFormFields] = useState(defaultFormFields);
+
+    const dispatch = useDispatch();
 
     // deconstruct formFields state object
     const { displayName, email, password, confirmPassword } = formFields;
@@ -43,27 +44,29 @@ export default function SignUpForm() {
             return;
         }
 
-        // if passwords are matching, try to create the user account
-        try {
-            // create the user account
-            const { user } = await createAuthUserWithEmailAndPassword(
-                email,
-                password
-            );
-            // create the user doc
-            await createUserDocumentFromAuth(user, { displayName });
-            // reset the form fields
-            resetFormFields();
-            // catch any error that occur during user creation
-        } catch (error) {
-            // error, email already in use
-            if (error.code === 'auth/email-already-in-use') {
-                alert('Cannot create user, email already in use');
-            } else {
-                // unknown error
-                console.log('User creation encountered an error', error);
-            }
-        }
+        dispatch(signUpStart(email, password, displayName));
+        resetFormFields();
+        // // if passwords are matching, try to create the user account
+        // try {
+        //     // create the user account
+        //     const { user } = await createAuthUserWithEmailAndPassword(
+        //         email,
+        //         password
+        //     );
+        //     // create the user doc
+        //     await createUserDocumentFromAuth(user, { displayName });
+        //     // reset the form fields
+        //     resetFormFields();
+        //     // catch any error that occur during user creation
+        // } catch (error) {
+        //     // error, email already in use
+        //     if (error.code === 'auth/email-already-in-use') {
+        //         alert('Cannot create user, email already in use');
+        //     } else {
+        //         // unknown error
+        //         console.log('User creation encountered an error', error);
+        //     }
+        // }
     };
 
     return (
