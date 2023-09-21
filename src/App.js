@@ -12,7 +12,7 @@ import { checkUserSession } from './store/user/user.action';
 
 export default function App() {
     const dispatch = useDispatch();
-
+    // test githubs
     useEffect(() => {
         dispatch(checkUserSession());
         // eslint-disable-next-line
